@@ -5,15 +5,14 @@ import { PizzaBlock } from "../Components/PizzaBlock/PizzaBlock";
 import { useState, useEffect } from "react";
 import {Skeleton} from "../Components/PizzaBlock/Skeleton";
 import { Pagination } from '../Components/Pagination/Pagination';
-import { AppContext } from '../App';
-import { useDispatch, useSelector } from 'react-redux';
+import { SearchContext } from '../App';
+import { useDispatch} from 'react-redux';
 import  {addFilter}  from '../store/filterSlice';
 
 
 export const Home = () => {
   const dispatch = useDispatch();
-  
-  const {searchValue} = useContext(AppContext);
+  const {searchValue} = useContext(SearchContext);
   let [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
