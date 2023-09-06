@@ -1,0 +1,28 @@
+.main{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  li{
+      
+    }
+    a{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      padding: 10px;
+      border: 1px solid #fb9302;
+      color: #fb9302;
+      cursor: pointer;
+      border-radius: 30px;
+      margin-right: 10px;
+    }
+  }
+  :global{
+    .selected{
+     a{ background: #fb9302;
+      color: #fff;}
+  }
+}
