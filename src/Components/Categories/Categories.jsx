@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { setCategory } from '../../store/filterSlice';
+import { setCategoryId } from '../../redux/slices/filterSlice';
 
 
-export const Categories = ({value, onClickCategory}) => {
+export const Categories = ({value}) => {
   const dispatch = useDispatch();
   
   const categories = ["Все","Мясные","Вегетарианская", "Гриль","Острые","Закрытые",
@@ -12,11 +12,10 @@ export const Categories = ({value, onClickCategory}) => {
     <div className="categories">
       <ul>
         {categories.map((item,index)=>(
-            <li key={index} className={value===index?'active':''} onClick={()=>dispatch(setCategory(index))}>{item}</li>    
+            <li key={index} className={value===index?'active':''} onClick={()=>dispatch(setCategoryId(index))}>{item}</li>    
           ))}
       </ul>
     </div>
   );
 };
 
-{/* <li key={index} className={value===index?'active':''} onClick={()=>onClickCategory(index)}>{item}</li>     */}
