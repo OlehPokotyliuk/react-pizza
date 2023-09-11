@@ -14,10 +14,9 @@ import { useDispatch, useSelector} from 'react-redux';
 
 export const Home = () => {
   const navigate = useNavigate();
-  const {categoryId, sort, currentPage} = useSelector(state=> state.filter);
-  const status= useSelector(state=> state.pizza.status);
-  const items = useSelector(state=> state.pizza.items.data);
   const dispatch = useDispatch();
+  const {items, status} = useSelector((state)=> state.pizza);
+  const {categoryId, sort, currentPage} = useSelector(state=> state.filter);
   const {searchValue} = useContext(SearchContext);
   const sortType = sort.sortProperty;
   const isSearch = useRef(false);
@@ -94,9 +93,15 @@ export const Home = () => {
             <Sort/>
           </div>
           <h2 className="content__title">Все пиццы</h2>
-          <div className="content__items">
-            {status==='loading'?skeletons:pizzas}
-          </div>
+          {
+            status === 'error' ? <div className="content__error-info">
+              <h2>😅 Произошла ошибка</h2>
+              <p className="">К сожалению, не удалось получить пиццы.
+              Попробуйте повторить попытку позже.</p>
+            </div>:
+            (<div className="content__items">{status==='loading'?skeletons:pizzas}</div>)
+          }
+          
           <Pagination currentPage={currentPage} onChangePage={onChangePage}/>
     </div>
 
