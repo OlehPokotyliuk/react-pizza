@@ -4,12 +4,10 @@ import {Cart} from "./pages/Cart";
 import { NotFound } from "./pages/NotFound/NotFound";
 import {FullPizza} from "./pages/FullPizza";
 import {Routes, Route} from 'react-router-dom';
-import {  useDispatch } from "react-redux";
 import { MainLayout } from "./layouts/MainLayout";
 
 
 function App() {
-  const dispatch = useDispatch();
   return ( 
         
           <Routes>
