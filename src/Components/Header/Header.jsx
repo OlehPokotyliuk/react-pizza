@@ -1,10 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React,{useEffect} from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Search } from '../Search/Search';
 import { useSelector } from 'react-redux';
+import { selectCart } from '../../redux/slices/cartSlice';
+
 
 export const Header = () => {
-  const {items, totalPrice} = useSelector(state => state.cart);
+  const {items, totalPrice} = useSelector(selectCart);
+  const location = useLocation();
+  console.log(location);
+
   const totalCount = items.reduce((sum,item)=> sum+item.count, 0);
   return (
     
@@ -12,15 +17,18 @@ export const Header = () => {
         <div className="container">
           <Link to="/">
           <div className="header__logo">
-            <img width="38" src="img/pizza-logo.svg" alt="Pizza logo" />
+            <img width="38" src="/img/pizza-logo.svg" alt="Pizza logo" />
             <div>
               <h1>React Pizza</h1>
               <p>самая вкусная пицца во вселенной</p>
             </div>
           </div>
           </Link>
-          <Search/>
-          <div className="header__cart">
+          <Search/><div className="header__cart">
+          {
+            location.pathname !== '/cart'
+            &&
+            
             <Link to="/cart" className="button button--cart">
               <span>{totalPrice} ₽</span>
               <div className="button__delimiter"></div>
@@ -55,7 +63,8 @@ export const Header = () => {
               </svg>
               <span>{totalCount}</span>
             </Link>
-          </div>
+        }
+        </div> 
         </div>
       </div>
   );
