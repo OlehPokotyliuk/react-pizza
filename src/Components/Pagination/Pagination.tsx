@@ -4,10 +4,9 @@ import classes from './Pagination.module.scss';
 
 type PaginationProps = {
   currentPage:number,
-  onChangePage:any,
+  onChangePage:(page:number)=>void,
 }
-export const Pagination:React.FC<PaginationProps> = ({currentPage, onChangePage}) => {
-  return (
+export const Pagination:React.FC<PaginationProps> = ({currentPage, onChangePage}) => (
     <ReactPaginate className={classes.main}
     breakLabel="..."
     nextLabel=">"
@@ -18,6 +17,5 @@ export const Pagination:React.FC<PaginationProps> = ({currentPage, onChangePage}
     forcePage={currentPage - 1}
     renderOnZeroPageCount={null}
   />
-  );
-};
+);
 

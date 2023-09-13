@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, selectCartItemById } from '../../redux/slices/cartSlice';
+import { addItem, selectCartItemById } from '../../redux/slices/cartSlice.ts';
 
 type PizzaBlockProps = {
   id:string,
@@ -43,7 +43,10 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({id, imageUrl,title, types
       
       {
         types.map((type, ind)=>(
-          <li key={ind} className={type === activeType&&'active'} onClick={()=>setActiveType(type)}>
+          <li 
+          key={ind} 
+          className={type === activeType?'active':''} 
+          onClick={()=>setActiveType(type)}>
             {typeNames[type]}
           </li>
         ))
@@ -51,7 +54,7 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({id, imageUrl,title, types
     </ul>
     <ul>
       {sizes.map((size, ind)=>(
-        <li className={ind === activeSize&&'active'} onClick={()=>setActiveSize(ind)}>
+        <li className={ind === activeSize?'active':''} onClick={()=>setActiveSize(ind)}>
           {size + 'см'}
         </li>
       ))}

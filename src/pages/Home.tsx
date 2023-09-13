@@ -2,12 +2,12 @@ import React, { useContext,useState, useEffect, useRef } from 'react';
 import { Categories } from "../Components/Categories/Categories.tsx";
 import { Sort, list } from "../Components/Sort/Sort.tsx";
 import { PizzaBlock } from "../Components/PizzaBlock/PizzaBlock.tsx";
-import {Skeleton} from "../Components/PizzaBlock/Skeleton.jsx";
+import {Skeleton} from "../Components/PizzaBlock/Skeleton.tsx";
 import { Pagination } from '../Components/Pagination/Pagination.tsx';
 import qs from 'qs';
 import { Link, useNavigate } from 'react-router-dom';
-import { selectFilter, setCurrentPage, setFilters} from '../redux/slices/filterSlice.js';
-import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice.js';
+import { selectFilter, setCurrentPage, setFilters} from '../redux/slices/filterSlice.ts';
+import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice.ts';
 import { useDispatch, useSelector} from 'react-redux';
 
 

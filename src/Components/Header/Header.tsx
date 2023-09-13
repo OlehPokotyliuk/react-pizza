@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search } from '../Search/Search.tsx';
 import { useSelector } from 'react-redux';
-import { selectCart } from '../../redux/slices/cartSlice';
+import { selectCart } from '../../redux/slices/cartSlice.ts';
 
 
 export const Header = () => {
