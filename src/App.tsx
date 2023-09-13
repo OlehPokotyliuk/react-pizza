@@ -1,11 +1,11 @@
+import React from "react";
 import "./scss/app.scss";
-import {Home} from "./pages/Home";
-import {Cart} from "./pages/Cart";
-import { NotFound } from "./pages/NotFound/NotFound";
-import {FullPizza} from "./pages/FullPizza";
+import {Home} from "./pages/Home.tsx";
+import {Cart} from "./pages/Cart.tsx";
+import { NotFound } from "./pages/NotFound/NotFound.tsx";
+import {FullPizza} from "./pages/FullPizza.tsx";
 import {Routes, Route} from 'react-router-dom';
-import { MainLayout } from "./layouts/MainLayout";
-
+import { MainLayout } from "./layouts/MainLayout.tsx";
 
 function App() {
   return ( 

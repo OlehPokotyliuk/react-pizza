@@ -1,9 +1,8 @@
 import React from 'react';
 import classes from './NotFound.module.scss';
 import { Link } from 'react-router-dom';
-import { Home } from '../Home';
 
-export const NotFound = () => {
+export const NotFound:React.FC = () => {
   return (
     <div className={classes.wrapper}>
       <h1>Страница не найдена</h1>

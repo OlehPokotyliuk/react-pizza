@@ -2,12 +2,15 @@ import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { setCategoryId } from '../../redux/slices/filterSlice';
 
-
-export const Categories = ({value}) => {
+type CategoriesProps = {
+  value: number,
+} 
+const categories:string[] = ["Все","Мясные","Вегетарианская", "Гриль","Острые","Закрытые",
+]
+export const Categories:React.FC<CategoriesProps> = ({value}) => {
   const dispatch = useDispatch();
   
-  const categories = ["Все","Мясные","Вегетарианская", "Гриль","Острые","Закрытые",
-  ]
+ 
   return (
     <div className="categories">
       <ul>

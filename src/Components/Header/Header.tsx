@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search } from '../Search/Search';
+import { Search } from '../Search/Search.tsx';
 import { useSelector } from 'react-redux';
 import { selectCart } from '../../redux/slices/cartSlice';
 
@@ -8,9 +8,8 @@ import { selectCart } from '../../redux/slices/cartSlice';
 export const Header = () => {
   const {items, totalPrice} = useSelector(selectCart);
   const location = useLocation();
-  console.log(location);
 
-  const totalCount = items.reduce((sum,item)=> sum+item.count, 0);
+  const totalCount = items.reduce((sum:number,item:any)=> sum+item.count, 0);
   return (
     
     <div className="header">

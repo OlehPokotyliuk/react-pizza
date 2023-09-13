@@ -1,17 +1,17 @@
 import React, { useContext,useState, useEffect, useRef } from 'react';
-import { Categories } from "../Components/Categories/Categories";
-import { Sort, list } from "../Components/Sort/Sort";
-import { PizzaBlock } from "../Components/PizzaBlock/PizzaBlock";
-import {Skeleton} from "../Components/PizzaBlock/Skeleton";
-import { Pagination } from '../Components/Pagination/Pagination';
+import { Categories } from "../Components/Categories/Categories.tsx";
+import { Sort, list } from "../Components/Sort/Sort.tsx";
+import { PizzaBlock } from "../Components/PizzaBlock/PizzaBlock.tsx";
+import {Skeleton} from "../Components/PizzaBlock/Skeleton.jsx";
+import { Pagination } from '../Components/Pagination/Pagination.tsx';
 import qs from 'qs';
 import { Link, useNavigate } from 'react-router-dom';
-import { selectFilter, setCurrentPage, setFilters} from '../redux/slices/filterSlice';
-import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
+import { selectFilter, setCurrentPage, setFilters} from '../redux/slices/filterSlice.js';
+import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice.js';
 import { useDispatch, useSelector} from 'react-redux';
 
 
-export const Home = () => {
+export const Home:React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // useSelector section
@@ -22,7 +22,7 @@ export const Home = () => {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
   
-  const onChangePage = (number) =>{
+  const onChangePage = (number:number) =>{
     dispatch(setCurrentPage(number))
   }
 
@@ -47,7 +47,9 @@ export const Home = () => {
     const category = categoryId > 0 ? `category=${categoryId}`: '';
     const search = searchValue ? `&search=${searchValue}`: '';
 
-    dispatch(fetchPizzas({
+    dispatch(
+      //@ts-ignore
+      fetchPizzas({
       order,
       sortBy,
       category,
@@ -81,7 +83,7 @@ export const Home = () => {
     
   },[categoryId, sort.sortProperty, searchValue, currentPage])
 
-  const pizzas = items.map(item=> (
+  const pizzas = items.map((item:any)=> (
     <Link to={`pizza/${item.id}`} key={item.id}><PizzaBlock {...item}/></Link>
   ));
   const skeletons = [...new Array(6)].map((_,index)=>(<Skeleton key={index}/>))
