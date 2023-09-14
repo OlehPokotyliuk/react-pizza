@@ -83,7 +83,7 @@ export const Home:React.FC = () => {
   // },[categoryId, sort.sortProperty, searchValue, currentPage])
 
   const pizzas = items.map((item:any)=> (
-      <PizzaBlock {...item}/>
+      <PizzaBlock {...item} key={item.id}/>
   ));
   const skeletons = [...new Array(6)].map((_,index)=>(<Skeleton key={index}/>))
   console.log(categoryId);
@@ -92,7 +92,7 @@ export const Home:React.FC = () => {
     <div className="container">
     <div className="content__top">
             <Categories value={categoryId}/>
-            <SortPopup/>
+            <SortPopup value={sort}/>
           </div>
           <h2 className="content__title">Все пиццы</h2>
           {

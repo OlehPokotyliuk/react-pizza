@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { setCategoryId } from '../../redux/slices/filterSlice.ts';
 
@@ -7,11 +7,11 @@ type CategoriesProps = {
 } 
 const categories:string[] = ["Все","Мясные","Вегетарианская", "Гриль","Острые","Закрытые",
 ]
-export const Categories:React.FC<CategoriesProps> = ({value}) => {
+export const Categories:React.FC<CategoriesProps> = memo(({value}) => {
   const dispatch = useDispatch();
   
- 
   return (
+    
     <div className="categories">
       <ul>
         {categories.map((item,index)=>(
@@ -20,5 +20,4 @@ export const Categories:React.FC<CategoriesProps> = ({value}) => {
       </ul>
     </div>
   );
-};
-
+})
