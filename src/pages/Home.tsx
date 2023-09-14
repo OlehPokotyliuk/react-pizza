@@ -1,19 +1,20 @@
 import React, { useContext,useState, useEffect, useRef } from 'react';
 import { Categories } from "../Components/Categories/Categories.tsx";
-import { Sort, list } from "../Components/Sort/Sort.tsx";
+import { SortPopup, list } from "../Components/Sort/SortPopup.tsx";
 import { PizzaBlock } from "../Components/PizzaBlock/PizzaBlock.tsx";
 import {Skeleton} from "../Components/PizzaBlock/Skeleton.tsx";
 import { Pagination } from '../Components/Pagination/Pagination.tsx';
 import qs from 'qs';
 import { Link, useNavigate } from 'react-router-dom';
 import { selectFilter, setCurrentPage, setFilters} from '../redux/slices/filterSlice.ts';
-import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice.ts';
-import { useDispatch, useSelector} from 'react-redux';
+import { SearchPizzaParams, fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice.ts';
+import { useSelector} from 'react-redux';
+import { useAppDispatch } from '../redux/store.ts';
 
 
 export const Home:React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   // useSelector section
   const {items, status} = useSelector(selectPizzaData);
   const {categoryId, sort, currentPage, searchValue} = useSelector(selectFilter);
@@ -26,18 +27,20 @@ export const Home:React.FC = () => {
     dispatch(setCurrentPage(number))
   }
 
-  useEffect(()=>{
-    if(window.location.search){
-      const params = qs.parse(window.location.search.substring(1));
-      const sort = list.find(obj => obj.sortProperty === params.sortProperty)
-      dispatch(
-        setFilters({
-          ...params,
-          sort,
-        }))
-        isSearch.current = true;
-    }
-  }, [])
+  // useEffect(()=>{
+  //   if(window.location.search){
+  //     const params = qs.parse(window.location.search.substring(1)) as unknown as SearchPizzaParams;
+  //     const sort = list.find(obj => obj.sortProperty === params.sortBy)
+      
+  //     dispatch(setFilters({
+  //       searchValue: params.search,
+  //       categoryId: Number(params.category),
+  //       currentPage: Number(params.currentPage),
+  //       sort: sort || list[0],
+  //     }))
+  //       isSearch.current = true;
+  //   }
+  // }, [])
 
   const getPizzas = async () => {
     
@@ -48,51 +51,48 @@ export const Home:React.FC = () => {
     const search = searchValue ? `&search=${searchValue}`: '';
 
     dispatch(
-      //@ts-ignore
       fetchPizzas({
       order,
       sortBy,
       category,
       search,
-      currentPage
+      currentPage: String(currentPage),
     }));
   
   };
 
   useEffect(() => {
-    if(!isSearch.current){
       getPizzas();
-      isSearch.current = false;
-    }
-    window.scrollTo(0,0);
+
   }, [categoryId, sortType, searchValue, currentPage]);
 
 
-  useEffect(()=>{
+  // useEffect(()=>{
     
-    if(isMounted.current){  
-      const queryString  = qs.stringify({
-        sortProperty: sort.sortProperty,
-        categoryId,
-        currentPage,
-      });
-      navigate(`?${queryString}`)
-    }
-    getPizzas();
-    isMounted.current = true;
+  //   if(isMounted.current){  
+  //     const queryString  = qs.stringify({
+  //       sortProperty: sort.sortProperty,
+  //       categoryId,
+  //       currentPage,
+  //     });
+  //     navigate(`?${queryString}`)
+  //   }
+  //   getPizzas();
+  //   isMounted.current = true;
     
-  },[categoryId, sort.sortProperty, searchValue, currentPage])
+  // },[categoryId, sort.sortProperty, searchValue, currentPage])
 
   const pizzas = items.map((item:any)=> (
-    <Link to={`pizza/${item.id}`} key={item.id}><PizzaBlock {...item}/></Link>
+      <PizzaBlock {...item}/>
   ));
   const skeletons = [...new Array(6)].map((_,index)=>(<Skeleton key={index}/>))
+  console.log(categoryId);
   return (
 
     <div className="container">
     <div className="content__top">
             <Categories value={categoryId}/>
-            <Sort/>
+            <SortPopup/>
           </div>
           <h2 className="content__title">Все пиццы</h2>
           {
