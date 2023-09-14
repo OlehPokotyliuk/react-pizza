@@ -1,15 +1,17 @@
-import React, { useContext,useState, useEffect, useRef } from 'react';
-import { Categories } from "../Components/Categories/Categories.tsx";
-import { SortPopup, list } from "../Components/Sort/SortPopup.tsx";
-import { PizzaBlock } from "../Components/PizzaBlock/PizzaBlock.tsx";
-import {Skeleton} from "../Components/PizzaBlock/Skeleton.tsx";
-import { Pagination } from '../Components/Pagination/Pagination.tsx';
+import React, { useEffect, useRef } from 'react';
+import { Categories } from "../Components/Categories/Categories";
+import { SortPopup, list } from "../Components/Sort/SortPopup";
+import { PizzaBlock } from "../Components/PizzaBlock/PizzaBlock";
+import {Skeleton} from "../Components/PizzaBlock/Skeleton";
+import { Pagination } from '../Components/Pagination/Pagination';
 import qs from 'qs';
 import { Link, useNavigate } from 'react-router-dom';
-import { selectFilter, setCurrentPage, setFilters} from '../redux/slices/filterSlice.ts';
-import { SearchPizzaParams, fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice.ts';
 import { useSelector} from 'react-redux';
 import { useAppDispatch } from '../redux/store.ts';
+import { selectPizzaData } from '../redux/pizza/selectors';
+import { selectFilter } from '../redux/filter/selectors';
+import { setCurrentPage } from '../redux/filter/slice';
+import { fetchPizzas } from '../redux/pizza/asyncActions';
 
 
 export const Home:React.FC = () => {

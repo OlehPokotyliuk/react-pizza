@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CartItem, addItem, selectCartItemById } from '../../redux/slices/cartSlice.ts';
 import { Link } from 'react-router-dom';
+import { selectCartItemById } from '../../redux/cart/selectors';
+import { addItem } from '../../redux/cart/slice';
+import { CartItem } from '../../redux/cart/types';
 
 type PizzaBlockProps = {
   id:string,
@@ -11,6 +13,7 @@ type PizzaBlockProps = {
   sizes:number[],
   price:number,
 }
+
 export const PizzaBlock: React.FC<PizzaBlockProps> = ({id, imageUrl,title, types, price, sizes}) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id))
@@ -44,7 +47,6 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({id, imageUrl,title, types
   </Link>
   <div className="pizza-block__selector">
     <ul>
-      
       {
         types.map((type, ind)=>(
           <li 

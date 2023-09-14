@@ -1,6 +1,7 @@
 import React, {memo, useEffect, useRef, useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { Sort, SortPropertyEnum, setSort } from '../../redux/slices/filterSlice.ts';
+import { Sort, SortPropertyEnum } from '../../redux/filter/types';
+import { setSort } from '../../redux/filter/slice';
 
 type ListItem = {
   name: string,
@@ -22,7 +23,7 @@ export const list:ListItem = [
 export const SortPopup:React.FC<SortPopupProps> = memo( ({value}) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const sortRef = useRef<HTMLDivElement>(null)
+  const sortRef = useRef<HTMLDivElement>(null);
   const onClickListItem =(obj: { name: string; sortProperty: any; })=>{
     dispatch(setSort(obj));
     setOpen(false);
@@ -43,6 +44,7 @@ export const SortPopup:React.FC<SortPopupProps> = memo( ({value}) => {
       document.body.removeEventListener('click', handleClickOutside);
     }
   }, []) 
+  
   return (
     <div ref={sortRef} className="sort">
               <div className="sort__label">

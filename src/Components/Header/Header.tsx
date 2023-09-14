@@ -1,16 +1,15 @@
-import React,{useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search } from '../Search/Search.tsx';
+import { Search } from '../Search/Search';
 import { useSelector } from 'react-redux';
-import { selectCart } from '../../redux/slices/cartSlice.ts';
-
+import { selectCart } from '../../redux/cart/selectors';
 
 export const Header = () => {
   const {items, totalPrice} = useSelector(selectCart);
   const location = useLocation();
   const isMounted = useRef(false)
-
   const totalCount = items.reduce((sum:number,item:any)=> sum+item.count, 0);
+
   useEffect(()=>{
     if(isMounted.current){
       const json = JSON.stringify(items);
@@ -18,8 +17,8 @@ export const Header = () => {
     }
     isMounted.current = true;
   }, [items])
+
   return (
-    
     <div className="header">
         <div className="container">
           <Link to="/">
