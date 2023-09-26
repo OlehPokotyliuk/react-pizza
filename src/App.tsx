@@ -1,8 +1,6 @@
 import React,{Suspense, lazy} from "react";
 import "./scss/app.scss";
 import Home from "./pages/Home";
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
 
 import {Routes, Route} from 'react-router-dom';
 const Cart = lazy(() => import(/*webpackChunkName:"[Cart]"*/'./pages/Cart'));
