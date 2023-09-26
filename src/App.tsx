@@ -11,7 +11,7 @@ const NotFound = lazy(() => import(/*webpackChunkName:"[NotFound]"*/"./pages/Not
 const MainLayout = lazy(() => import(/*webpackChunkName:"[MainLayout]"*/"./layouts/MainLayout"));
 function App() {
   return ( 
-    <Suspense fallback={<>Pfuheprf</>}>
+    <Suspense fallback={<>Загрузка</>}>
           <Routes>
             <Route path="/" element={<MainLayout/>}>
               <Route path={"react-pizza"} element={<Home />}/>
