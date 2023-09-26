@@ -25,21 +25,6 @@ const Home:React.FC = () => {
     dispatch(setCurrentPage(number))
   }
 
-  // useEffect(()=>{
-  //   if(window.location.search){
-  //     const params = qs.parse(window.location.search.substring(1)) as unknown as SearchPizzaParams;
-  //     const sort = list.find(obj => obj.sortProperty === params.sortBy)
-      
-  //     dispatch(setFilters({
-  //       searchValue: params.search,
-  //       categoryId: Number(params.category),
-  //       currentPage: Number(params.currentPage),
-  //       sort: sort || list[0],
-  //     }))
-  //       isSearch.current = true;
-  //   }
-  // }, [])
-
   const getPizzas = async () => {
     
     
@@ -64,21 +49,6 @@ const Home:React.FC = () => {
 
   }, [categoryId, sortType, searchValue, currentPage]);
 
-
-  // useEffect(()=>{
-    
-  //   if(isMounted.current){  
-  //     const queryString  = qs.stringify({
-  //       sortProperty: sort.sortProperty,
-  //       categoryId,
-  //       currentPage,
-  //     });
-  //     navigate(`?${queryString}`)
-  //   }
-  //   getPizzas();
-  //   isMounted.current = true;
-    
-  // },[categoryId, sort.sortProperty, searchValue, currentPage])
 
   const pizzas = items.map((item:any)=> (
       <PizzaBlock {...item} key={item.id}/>
