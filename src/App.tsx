@@ -1,15 +1,17 @@
-import React from "react";
+import React,{Suspense, lazy} from "react";
 import "./scss/app.scss";
-import {Home} from "./pages/Home.tsx";
-import {Cart} from "./pages/Cart.tsx";
-import { NotFound } from "./pages/NotFound/NotFound.tsx";
-import {FullPizza} from "./pages/FullPizza.tsx";
-import {Routes, Route} from 'react-router-dom';
-import { MainLayout } from "./layouts/MainLayout.tsx";
+import Home from "./pages/Home";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
+import {Routes, Route} from 'react-router-dom';
+const Cart = lazy(() => import(/*webpackChunkName:"[Cart]"*/'./pages/Cart'));
+const FullPizza = lazy(() => import(/*webpackChunkName:"[FullPizza]"*/'./pages/FullPizza'));
+const NotFound = lazy(() => import(/*webpackChunkName:"[NotFound]"*/"./pages/NotFound/NotFound"));
+const MainLayout = lazy(() => import(/*webpackChunkName:"[MainLayout]"*/"./layouts/MainLayout"));
 function App() {
   return ( 
-        
+    <Suspense fallback={<>Pfuheprf</>}>
           <Routes>
             <Route path="/" element={<MainLayout/>}>
               <Route path={""} element={<Home />}/>
@@ -18,6 +20,7 @@ function App() {
               <Route path={"*"} element={<NotFound/>}/>
             </Route>
           </Routes>
+    </Suspense>
   );
 }
  

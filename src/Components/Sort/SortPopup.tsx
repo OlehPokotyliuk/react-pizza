@@ -82,4 +82,3 @@ export const SortPopup:React.FC<SortPopupProps> = memo( ({value}) => {
             </div>
   );
 });
-

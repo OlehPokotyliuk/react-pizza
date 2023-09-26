@@ -1,11 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { Categories } from "../Components/Categories/Categories";
-import { SortPopup, list } from "../Components/Sort/SortPopup";
-import { PizzaBlock } from "../Components/PizzaBlock/PizzaBlock";
-import {Skeleton} from "../Components/PizzaBlock/Skeleton";
-import { Pagination } from '../Components/Pagination/Pagination';
+import { Categories, SortPopup, PizzaBlock,  Skeleton, Pagination } from '../Components'; 
 import qs from 'qs';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector} from 'react-redux';
 import { useAppDispatch } from '../redux/store.ts';
 import { selectPizzaData } from '../redux/pizza/selectors';
@@ -14,7 +10,7 @@ import { setCurrentPage } from '../redux/filter/slice';
 import { fetchPizzas } from '../redux/pizza/asyncActions';
 
 
-export const Home:React.FC = () => {
+const Home:React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   // useSelector section
@@ -62,7 +58,7 @@ export const Home:React.FC = () => {
     }));
   
   };
-
+  
   useEffect(() => {
       getPizzas();
 
@@ -88,7 +84,6 @@ export const Home:React.FC = () => {
       <PizzaBlock {...item} key={item.id}/>
   ));
   const skeletons = [...new Array(6)].map((_,index)=>(<Skeleton key={index}/>))
-  console.log(categoryId);
   return (
 
     <div className="container">
@@ -113,3 +108,4 @@ export const Home:React.FC = () => {
   );
 };
 
+export default Home

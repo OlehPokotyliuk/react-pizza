@@ -18,4 +18,3 @@ export const Pagination:React.FC<PaginationProps> = ({currentPage, onChangePage}
     renderOnZeroPageCount={null}
   />
 );
-

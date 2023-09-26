@@ -14,4 +14,3 @@ export const CartEmpty: React.FC = () => (
         </Link>
       </div>
   );
-
